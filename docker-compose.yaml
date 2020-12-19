@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+
+    api:
+        container_name: "thecatapi_php"
+        build:
+            ./docker/api
+        volumes:
+            - ./:/var/www:rw
+
+    nginx:
+        container_name: "thcatapi_nginx"
+        build: ./docker/nginx
+        restart: always
+        ports:
+          - "9000:80"
+        volumes:
+            - ./:/var/www
+
+    mysql:
+        container_name: "thcatapi_mysql"
+        image: mysql:5.7
+        command: --innodb-use-native-aio=0
+        restart: always
+        ports:
+            - "3306:3306"
+        volumes:
+            - "./docker/dbdata:/var/lib/mysql"
+        environment:
+            MYSQL_DATABASE: thecatapi
+            MYSQL_ROOT_PASSWORD: root
+
