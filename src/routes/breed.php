@@ -3,28 +3,40 @@
 use Slim\Http\Request;
 use Slim\Http\Response;
 use App\Models\Breed;
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
+use App\Services\ApiCat;
 
 $app->get('/breeds', function (Request $request, Response $response, array $args) {
 
+    $status = false;
+    $content = [];
+    $code = 200;
+    $cached = true;
 
-    $log = new Logger('log');
-    $log->pushHandler(new StreamHandler('/var/www/logs/hg.log', Logger::DEBUG));
+    $name =  $request->getQueryParam('name') ?? '';
 
+    if($name){
+        try {
+            $content = Breed::where('name', $name)->first();
 
-    try {
-        $result = Breed::where('name','teste')->first();
-        $log->debug(print_r($result, true));
+        } catch (Exception $e) {
+            $this->logger->info($e->getMessage());
+        }
 
-    } catch (\Exception $e) {
-        //throw $th;
+        if(!$content){
+            $result = ApiCat::find($name, $this);
+            $content = $result['content'];
+            $code = $result['http_code'];
+            $cached = false;
+
+            $status = $code == 200 && $content ? true : false ;
+        }
+
     }
 
     return $response->withJson([
-        'status' => true,
-        'message' => 'Everything is ok!',
-        'result' => $result
-    ], 200);
+        'status' => $status,
+        'cached' => $cached,
+        'content' => $content
+    ], $code);
 
 });
