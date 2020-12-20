@@ -11,7 +11,8 @@ $pdo = $container['db']->getPdo();
 
 return [
     'paths' => [
-        'migrations' => __DIR__ . '/src/migrations'
+        'migrations' => __DIR__ . '/src/migrations',
+        'seeds' => __DIR__ . '/src/seeds',
     ],
     'environments' => [
         'default_database' => 'development',
