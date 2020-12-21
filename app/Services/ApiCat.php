@@ -8,6 +8,7 @@ class ApiCat
 {
 
     private static $app;
+    private static $db;
 
     private static function request(string $name): Array {
 
@@ -50,7 +51,7 @@ class ApiCat
 
     private static function register($request): bool {
         $has_result = count($request['content']) ? true : false;
-        if(!$has_result){
+        if(!$has_result || !self::$db){
             return false;
         }
 
@@ -58,15 +59,15 @@ class ApiCat
         $content['weight_imperial'] = $content['weight']['imperial'];
         $content['weight_metric'] =  $content['weight']['metric'];
         unset($content['weight']);
-        // self::$app->logger->info( print_r($content, true));
 
         $breed = Breed::create($content);
 
         return true;
     }
 
-    public static function find(string $name, $app): Array {
+    public static function find(string $name, $app, $db = true): Array {
         self::$app = $app;
+        self::$db = $db;
         $request = self::request($name);
         $request['http_code'] = $request['http_code'] != 0 ? $request['http_code'] : 503;
         self::register($request);
