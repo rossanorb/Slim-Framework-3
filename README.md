@@ -21,10 +21,12 @@ docker exec thecatapi_php vendor/bin/phinx seed:run
 POST http://localhost:9000/login
 
 CAMPOS:
+
 username: admin
 password: @#$RF@!718
 
-RESPONSE
+RESPOSTA:
+
 {
     "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImNyZWF0ZWRfYXQiOiIyMDIwLTEyLTIxVDIyOjU4OjA0LjAwMDAwMFoiLCJ1cGRhdGVkX2F0IjoiMjAyMC0xMi0yMVQyMjo1ODowNC4wMDAwMDBaIn0.OqzqZXJb9XLsqBBlEsXql87y8NDRY2tT2v7Pkn4KRiU"
 }
