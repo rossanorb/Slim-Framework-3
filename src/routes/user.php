@@ -15,15 +15,22 @@ $app->post('/login', function (Request $request, Response $response, array $args
     $username = $post['username'] ?? null;
     $password = $post['password'] ?? null;
 
-    $user = User::where('username', $username)->first();
+    try {
+        $user = User::where('username', $username)->first();
 
-    if (!is_null($user) and password_verify($password, $user->password)) {
-        $key = $this->get('settings')['secretKey'];
+        if (!is_null($user) and password_verify($password, $user->password)) {
+            $key = $this->get('settings')['secretKey'];
 
-        return $response->withJson([
-            'token' => JWT::encode($user, $key)
-        ]);
+            return $response->withJson([
+                'token' => JWT::encode($user, $key)
+            ]);
+        }
+
+        return $response->withJson(['status' => 'Unauthorized'], 401);
+    } catch (\Exception $e) {
+        $this->logger->info($e->getMessage());
     }
 
-    return $response->withJson(['status' => 'Unauthorized'], 401);
+    return $response->withJson(['status' => 'Resource temporarily unavailable'], 503);
+
 });
