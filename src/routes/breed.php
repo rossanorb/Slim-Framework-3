@@ -20,13 +20,12 @@ $app->get('/breeds', function (Request $request, Response $response, array $args
             $cached = true;
 
         } catch (Exception $e) {
-            $bd = false;
             $this->logger->info($e->getMessage());
         }
 
         if(!$content instanceof Breed){
             $this->logger->info('consultando api');
-            $result = ApiCat::find($name, $this, $bd);
+            $result = ApiCat::find($name, $this);
             $content = $result['content'];
             $code = $result['http_code'];
             $cached = false;
