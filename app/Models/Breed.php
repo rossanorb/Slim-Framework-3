@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class Breed extends Eloquent
 {
 
-    protected $hidden = ['breed_id'];
+    protected $hidden = ['breed_id','created_at','updated_at'];
     protected $casts = ['id' => 'string'];
     protected $fillable = [
         'id',
