@@ -41,7 +41,7 @@ class BreedTest extends BaseTestCase
         $this->assertEquals('American Curl', $body['content']['name']);
     }
 
-    public function testSearchApi(){
+    public function testSearchCatApi(){
         $this->setToken($this->token());
         $response = $this->runApp('GET', '/breeds?name=xxxxx');
         $body = json_decode($response->getBody(), true);
@@ -56,6 +56,20 @@ class BreedTest extends BaseTestCase
         $this->assertEquals(404, $response->getStatusCode());
         $this->assertEquals(false, $body['status']);
         $this->assertEquals(false, $body['cache']);
+    }
+
+    public function testSearchBreedByParamInvalid(){
+        $this->setToken($this->token());
+
+        $response = $this->runApp('GET', '/breeds?potato=American Curl');
+        $this->assertEquals(404, $response->getStatusCode());
+
+        $response = $this->runApp('GET', '/breeds?name=');
+        $this->assertEquals(404, $response->getStatusCode());
+
+        $response = $this->runApp('GET', '/breeds');
+        $this->assertEquals(404, $response->getStatusCode());
+
     }
 
 }
