@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Breed extends Eloquent
 {
+
+    protected $hidden = ['breed_id'];
+    protected $casts = ['id' => 'string'];
     protected $fillable = [
         'id',
         'name',
@@ -50,4 +53,5 @@ class Breed extends Eloquent
         'weight_metric',
         'wikipedia_url'
     ];
+
 }
