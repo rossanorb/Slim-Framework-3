@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Functional;
 
 use Slim\App;
 use Slim\Http\Request;
@@ -21,12 +21,6 @@ class BaseTestCase extends \PHPUnit_Framework_TestCase
      * @var bool
      */
     protected $withMiddleware = true;
-    protected $token = '';
-
-
-    public function setToken($token){
-        $this->token =  $token;
-    }
 
     /**
      * Process the application given a request method and URI
@@ -42,8 +36,7 @@ class BaseTestCase extends \PHPUnit_Framework_TestCase
         $environment = Environment::mock(
             [
                 'REQUEST_METHOD' => $requestMethod,
-                'REQUEST_URI' => $requestUri,
-                'HTTP_AUTHORIZATION'   => $this->token
+                'REQUEST_URI' => $requestUri
             ]
         );
 
