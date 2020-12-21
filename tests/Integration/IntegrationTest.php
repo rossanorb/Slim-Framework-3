@@ -93,7 +93,7 @@ class IntegrationTest extends BaseTestCase
 
     }
 
-    // busca pela api pois nao esta chaceado
+    // busca pela api pois nao esta cacheado
     public function testCachedFalse(){
         $this->delete();
         $this->setToken($this->token());
