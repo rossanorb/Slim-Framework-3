@@ -10,10 +10,12 @@ class ApiCat
     private static $app;
 
     private static function request(string $name): Array {
+        if(!$name) return [];
 
         $curl = curl_init();
         $api = self::$app->get('settings')['api'];
         $content = [];
+        $name = urlencode(trim($name));
 
         curl_setopt_array($curl, array(
             CURLOPT_URL => "{$api}/v1/breeds/search?name={$name}",
@@ -50,7 +52,6 @@ class ApiCat
 
     private static function register($request): bool {
         $has_result = count($request['content']) ? true : false;
-        self::$app->logger->info("Status Banco :" . $db);
         if(!$has_result){
             return false;
         }
