@@ -2,8 +2,8 @@
 ## Configuração:
 ### 1º após baixar projeto rodar o seguinte comando na raiz do projeto:
 composer install
-### 2º na raiz do projeto rodar o commando :
-dar permissão de escrita nas pasta logs
+
+### 2º dar permissão de escrita nas pasta logs
 ### 3º na raiz do projeto rodar o commando :
 docker-compose up -d
 
