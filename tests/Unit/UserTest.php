@@ -6,6 +6,7 @@ use Slim\App;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Http\Environment;
+use Tests\BaseTestCase;
 
 class UserTest extends BaseTestCase
 {

@@ -6,6 +6,7 @@ use Slim\App;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Http\Environment;
+use Tests\BaseTestCase;
 
 class BreedTest extends BaseTestCase
 {
@@ -45,7 +46,7 @@ class BreedTest extends BaseTestCase
         $this->setToken($this->token());
         $response = $this->runApp('GET', '/breeds?name=xxxxx');
         $body = json_decode($response->getBody(), true);
-        $this->assertEquals(false, $body['cache']);
+        $this->assertEquals(false, $body['cached']);
     }
 
     public function testSearchBreedByNameNotFound(){
@@ -55,7 +56,7 @@ class BreedTest extends BaseTestCase
 
         $this->assertEquals(404, $response->getStatusCode());
         $this->assertEquals(false, $body['status']);
-        $this->assertEquals(false, $body['cache']);
+        $this->assertEquals(false, $body['cached']);
     }
 
     public function testSearchBreedByParamInvalid(){
