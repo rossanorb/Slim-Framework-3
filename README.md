@@ -12,7 +12,7 @@ docker-compose up -d
 docker exec thecatapi_php vendor/bin/phinx migrate
 ### se necessário, no terminal rodar o comando abaixo para desfazer as migrations
 docker exec thecatapi_php vendor/bin/phinx rollback
-## com as tabelas criadas,  no terminal rodar o comando abaixo para criar um usuário padrao  username: admin password: @#$RF@!718
+### com as tabelas criadas,  no terminal rodar o comando abaixo para criar um usuário padrao  username: admin password: @#$RF@!718
 docker exec thecatapi_php vendor/bin/phinx seed:run
 
 
