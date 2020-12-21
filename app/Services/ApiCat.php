@@ -62,8 +62,8 @@ class ApiCat
         unset($content['weight']);
 
         try {
-            $breed = Breed::create($content);
-        } catch (Exception $e) {
+            Breed::create($content);
+        } catch (\Exception $e) {
             self::$app->logger->info($e->getMessage());
         }
 
