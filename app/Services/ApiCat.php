@@ -2,13 +2,17 @@
 
 namespace App\Services;
 
+use App\Models\Breed;
+
 class ApiCat
 {
 
-    private static function request(string $name, $app): Array {
+    private static $app;
+
+    private static function request(string $name): Array {
 
         $curl = curl_init();
-        $api = $app->get('settings')['api'];
+        $api = self::$app->get('settings')['api'];
         $content = [];
 
         curl_setopt_array($curl, array(
@@ -16,7 +20,7 @@ class ApiCat
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 5,
+            CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => array(
@@ -31,11 +35,11 @@ class ApiCat
         curl_close($curl);
 
         if ($err) {
-            $app->logger->info("cURL Error #:" . $err);
+            self::$app->logger->info("cURL Error #:" . $err);
         }
 
         if($response){
-            $content = json_decode($response);
+            $content = json_decode($response, true);
         }
 
         return [
@@ -44,15 +48,28 @@ class ApiCat
         ];
     }
 
-    private static function register(){
+    private static function register($request): bool {
+        $has_result = count($request['content']) ? true : false;
+        if(!$has_result){
+            return false;
+        }
 
+        $content = current($request['content']);
+        $content['weight_imperial'] = $content['weight']['imperial'];
+        $content['weight_metric'] =  $content['weight']['metric'];
+        unset($content['weight']);
+        // self::$app->logger->info( print_r($content, true));
+
+        $breed = Breed::create($content);
+
+        return true;
     }
 
     public static function find(string $name, $app): Array {
-        $request = self::request($name, $app);
+        self::$app = $app;
+        $request = self::request($name);
         $request['http_code'] = $request['http_code'] != 0 ? $request['http_code'] : 503;
-        // self::register($request);
-        $app->logger->info( print_r($request, true));
+        self::register($request);
         return $request;
     }
 
