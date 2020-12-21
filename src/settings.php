@@ -27,6 +27,8 @@ return [
             'prefix' => ''
         ],
 
-        'api' => 'https://api.thecatapi.com'
+        'api' => 'https://api.thecatapi.com',
+
+        'secretKey' => 'lJEeFAWNJ6kiHDvpou9iu7kjJXy7GWwOAvPZCUXBNhlG8IOIZNyQXimwxT5hLLjGuUbJFo9dNN2tiE9RwCarcIxUy+iInif6e4'
     ],
 ];
