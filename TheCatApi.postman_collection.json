@@ -1,0 +1,105 @@
+{
+	"info": {
+		"_postman_id": "4d3a92c6-ef28-429c-9514-fb65b95d49f1",
+		"name": "TheCatApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Breed Search",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImNyZWF0ZWRfYXQiOiIyMDIwLTEyLTIxVDEzOjU3OjA0LjAwMDAwMFoiLCJ1cGRhdGVkX2F0IjoiMjAyMC0xMi0yMVQxMzo1NzowNC4wMDAwMDBaIn0.kdOzF4KRylCb-C6n221Wy_NWWmALiC_ulIwnxcwZTmA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9000/breeds?name=American Curl",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"breeds"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "American Curl"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImNyZWF0ZWRfYXQiOiIyMDIwLTEyLTIxVDEzOjU3OjA0LjAwMDAwMFoiLCJ1cGRhdGVkX2F0IjoiMjAyMC0xMi0yMVQxMzo1NzowNC4wMDAwMDBaIn0.kdOzF4KRylCb-C6n221Wy_NWWmALiC_ulIwnxcwZTmA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login - token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "@#$RF@!718",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:9000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

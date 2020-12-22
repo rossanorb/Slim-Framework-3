@@ -56,7 +56,7 @@ RESPOSTA:
 
 cached: indica se a consulta está cacheada. Retornará true quando estiver no banco, e false quando retornado pela api.
 
-
+--- Arquivo POSTMAN  "TheCatApi.postman_collection.json", para importação econtra-se disponível na raiz do projeto
 
 ## Para rodar testes, executar no terminal
 
