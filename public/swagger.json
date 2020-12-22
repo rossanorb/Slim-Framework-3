@@ -1,0 +1,102 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "The Cat API",
+        "version": "1.0"
+    },
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "login"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes:": [
+                    "text/plain"
+                ],
+                "requestBody": {
+                    "description": "Login",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/User"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "503": {
+                        "description": "Resource temporarily unavailable"
+                    }
+                }
+            }
+        },
+        "/breeds?name={name}": {
+            "get": {
+                "tags": [
+                    "Breeds"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "name",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "503": {
+                        "description": "Service Unavailable"
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "ApiKeyAuth": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "Authorization"
+            }
+        },
+        "User": {
+            "type": "object",
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

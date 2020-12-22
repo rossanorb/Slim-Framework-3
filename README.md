@@ -15,7 +15,8 @@ docker exec thecatapi_php vendor/bin/phinx rollback
 ### com as tabelas criadas,  no terminal rodar o comando abaixo para criar um usuário padrao  username: admin password: @#$RF@!718
 docker exec thecatapi_php vendor/bin/phinx seed:run
 
-
+## Acesso ao Swagger
+http://localhost:9000/dist/index.html
 ## Endpoints:
 
 POST http://localhost:9000/login
