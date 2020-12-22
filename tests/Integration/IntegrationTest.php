@@ -98,7 +98,7 @@ class IntegrationTest extends BaseTestCase
         $this->delete();
         $this->setToken($this->token());
 
-        $response = $this->runApp('GET', "/breeds?name={$breed->name}");
+        $response = $this->runApp('GET', "/breeds?name=test");
         $body = json_decode($response->getBody(), true);
         $this->assertEquals(false, $body['cached']);
 
